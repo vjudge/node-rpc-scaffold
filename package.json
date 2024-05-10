@@ -1,0 +1,60 @@
+{
+  "name": "node-rpc-scaffold",
+  "version": "0.1.0",
+  "description": "node rpc scaffold",
+  "main": "dist/src/server.js",
+  "scripts": {
+    "build": "node bin/proto && rm -rf dist && tsc -p tsconfig.json",
+    "build:proto": "node bin/proto",
+    "start:prod": "node dist/src/server.js",
+    "start:server": "export $(cat .env | xargs -L 1) && DEBUG=c* nodemon --config nodemon-server.json",
+    "start:client": "export $(cat .env | xargs -L 1) && DEBUG=c* nodemon --config nodemon-client.json",
+    "monitor": "node dist/src/monitor.js",
+    "eslint": "eslint src --ext .ts",
+    "test": "rm -rf coverage && export $(cat .env.test | xargs -L 1) && jest -i"
+  },
+  "author": "gradonday@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "@camin/server-common": "^0.4.1",
+    "@grpc/grpc-js": "^1.10.7",
+    "@grpc/proto-loader": "^0.7.13",
+    "config": "^3.3.7",
+    "google-protobuf": "^3.21.2",
+    "grpc-health-check": "^2.0.2",
+    "rimraf": "^5.0.5"
+  },
+  "devDependencies": {
+    "@tsconfig/node16": "^1.0.3",
+    "@types/config": "^3.3.0",
+    "@types/debug": "^4.1.7",
+    "@types/google-protobuf": "^3.15.12",
+    "@types/jest": "^27.5.1",
+    "@types/node": "^16.0.0",
+    "@types/source-map-support": "^0.5.10",
+    "@types/supertest": "^2.0.12",
+    "@typescript-eslint/eslint-plugin": "^5.45.1",
+    "@typescript-eslint/parser": "^5.45.1",
+    "conventional-changelog-cli": "^2.2.2",
+    "debug": "^4.3.4",
+    "eslint": "^8.29.0",
+    "eslint-import-resolver-typescript": "^3.5.2",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jest": "^27.1.6",
+    "grpc_tools_node_protoc_ts": "^5.3.3",
+    "grpc-tools": "^1.12.4",
+    "jest": "^27.5.1",
+    "jest-junit": "^15.0.0",
+    "nodemon": "^2.0.16",
+    "supertest": "^6.3.3",
+    "ts-jest": "^27.1",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "ts-proto": "^1.174.0",
+    "tsconfig-paths": "^4.0.0",
+    "typescript": "^4.9.0"
+  },
+  "engines": {
+    "node": ">=16"
+  }
+}
