@@ -186,3 +186,6 @@ dist
 
 # SvelteKit build / generate output
 .svelte-kit
+
+# rpc 
+models
