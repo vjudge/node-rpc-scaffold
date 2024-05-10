@@ -2,7 +2,8 @@ const { join } = require('path');
 const { execSync } = require('child_process');
 const { rimrafSync } = require('rimraf');
 const { protoPath: healthProtoPath } = require('grpc-health-check');
-const { copyFileSync } = require('fs');
+const path = require('path');
+const fs = require('fs');
 
 const PROTO_DIR = join(__dirname, '../proto');
 const MODEL_DIR = join(__dirname, '../src/models');
@@ -13,7 +14,13 @@ rimrafSync(`${MODEL_DIR}/*`, {
   glob: { ignore: `${MODEL_DIR}/tsconfig.json` },
 });
 
-copyFileSync(healthProtoPath, join(PROTO_DIR, 'health.proto'));
+fs.copyFileSync(healthProtoPath, join(PROTO_DIR, 'health.proto'));
+
+// check models is exist
+const isExist = fs.existsSync(path.join(__dirname, '../src/models'));
+if (!isExist) {
+  fs.mkdirSync(path.join(__dirname, '../src/models'));
+}
 
 // https://github.com/stephenh/ts-proto/blob/main/README.markdown#supported-options
 const tsProtoOpt = [
